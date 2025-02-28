@@ -1,10 +1,23 @@
+import Image from "next/image";
 import Link from "next/link";
+import Hero from "./hero.svg";
 
 export default async function Home() {
   return (
     <div className="font-[family-name:var(--font-geist-sans)]">
-      <header className="fixed top-0 left-0 right-0 w-full h-12 bg-slate-50 border-b border-b-slate-100 px-4 py-2 font-bold text-lg z-10 shadow-sm flex items-center">
-        <Link href="/">rentwise.</Link>
+      <header className="fixed top-0 left-0 right-0 w-full h-12 bg-slate-50 border-b border-b-slate-100 px-4 py-2 z-10 shadow-sm flex items-center">
+        <Link href="/" className="font-bold text-lg">
+          rentwise.
+        </Link>
+        <ul className="flex flex-row gap-x-4 absolute left-1/2 transform -translate-x-1/2">
+          <li>
+            <a href="#">How it works</a>
+          </li>
+          <li>
+            <a href="#">FAQs</a>
+          </li>
+        </ul>
+        <div />
       </header>
       <main className="p-4 mt-12">
         <div className="flex mx-auto max-w-screen-lg pt-32">
@@ -17,9 +30,18 @@ export default async function Home() {
               with trusted reviews
             </p>
             <p className="text-xl">
-              Great tenants leave great reviews. Use RentWise to build trust and
+              Great tenants leave great reviews. Use{" "}
+              <span className="font-bold">RentWise</span> to build trust and
               command higher rents
             </p>
+          </div>
+          <div className="w-1/2">
+            <Image
+              src={Hero}
+              alt="illustration of a tenant leaving a review"
+              width={800}
+              height={600}
+            />
           </div>
         </div>
       </main>
