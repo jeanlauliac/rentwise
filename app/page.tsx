@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import Hero from "./hero.svg";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default async function Home() {
   return (
@@ -19,12 +21,12 @@ export default async function Home() {
         </ul>
         <div />
       </header>
-      <main className="p-4 mt-12">
-        <div className="flex mx-auto max-w-screen-lg pt-32">
+      <main className="p-8 mt-8">
+        <div className="flex mx-auto max-w-screen-lg pt-16 justify-center items-center">
           <div className="w-1/2 flex flex-col gap-8">
             <p className="text-4xl font-bold">
               Boost your{" "}
-              <span className="text-blue-600 bg-slate-100 px-2">
+              <span className="text-blue-600 bg-slate-100 px-1">
                 rental income
               </span>{" "}
               with trusted reviews
@@ -36,14 +38,19 @@ export default async function Home() {
             </p>
           </div>
           <div className="w-1/2">
-            <Image
-              src={Hero}
-              alt="illustration of a tenant leaving a review"
-              width={800}
-              height={600}
-            />
+            <Image src={Hero} alt="illustration of a tenant leaving a review" />
           </div>
         </div>
+        <form className="flex text-4xl mx-auto max-w-screen-sm pt-16 justify-center items-center gap-x-4">
+          <Input
+            className="w-1/2 text-lg"
+            type="email"
+            placeholder="Enter your email"
+          />
+          <Button type="submit" className="">
+            Get early access
+          </Button>
+        </form>
       </main>
     </div>
   );
