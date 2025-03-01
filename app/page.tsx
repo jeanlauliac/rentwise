@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Hero from "./hero.svg";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import EmailForm from "./email-form";
 
 export default async function Home() {
   return (
@@ -45,16 +44,9 @@ export default async function Home() {
             />
           </div>
         </div>
-        <form className="flex text-4xl mx-auto max-w-(--breakpoint-sm) pt-16 justify-center items-center gap-x-4">
-          <Input
-            className="w-1/2 text-lg"
-            type="email"
-            placeholder="Enter your email"
-          />
-          <Button type="submit" className="">
-            Get early access
-          </Button>
-        </form>
+        <div className="flex mx-auto max-w-(--breakpoint-sm) rounded-full border py-4 px-6 bg-slate-50 my-8">
+          <EmailForm />
+        </div>
       </main>
     </div>
   );
