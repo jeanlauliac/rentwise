@@ -1,44 +1,37 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
-import db from "@/db";
-import { customColumnsTable, moleculesTable } from "@/db/schema";
-import { eq, sql } from "drizzle-orm";
+export async function addContact(formData: FormData) {
+  const email = formData.get("email");
 
-export async function createCustomColumn(formData: FormData) {
-  const title = formData.get("title") as string;
-  const dataType = formData.get("dataType") as string;
-  if (!title || !dataType) return;
+  const response = await fetch("https://api.brevo.com/v3/contacts", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Api-Key": process.env.BREVO_API_KEY ?? "",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      smsBlacklisted: true,
+      email,
+      listIds: [2],
+    }),
+  });
 
-  await db.insert(customColumnsTable).values({ title, dataType });
+  if (!response.ok) {
+    // Handle non-200 responses
+    const info = await response.json();
 
-  // At this point we could fill up all rows in the molecule DB with random
-  // values but I felt it wasn't really meaningful for this demo.
+    if (info.code === "duplicate_parameter") {
+      // Contact already exists, which is fine
+      return { success: true };
+    }
 
-  // Revalidate the cache (refresh the page seamlessly)
-  revalidatePath("/");
-}
+    // Some unhandled error, log this
+    console.error("Failed to create contact", info);
+    return {
+      success: false,
+    };
+  }
 
-export async function deleteCustomColumn(id: number) {
-  await db.delete(customColumnsTable).where(eq(customColumnsTable.id, id));
-
-  // TODO: Delete field from all molecules.
-
-  revalidatePath("/");
-}
-
-export async function updateCustomColumnValue(
-  zincId: string,
-  columnId: number,
-  value: string | number
-) {
-  // TODO: do some validation of the data type.
-
-  await db
-    .update(moleculesTable)
-    .set({
-      customData: sql`jsonb_set("customData", array[${columnId.toString()}], 
-        ${JSON.stringify(value)}::jsonb)`,
-    })
-    .where(eq(moleculesTable.zincId, zincId));
+  return { success: true };
 }
