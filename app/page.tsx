@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Hero from "./hero.svg";
+import Hero from "./hero.png";
 import EmailForm from "./email-form";
 
 export default async function Home() {
@@ -44,7 +44,7 @@ export default async function Home() {
             />
           </div>
         </div>
-        <div className="flex mx-auto max-w-(--breakpoint-sm) rounded-full border py-4 px-6 bg-slate-50 my-8">
+        <div className="flex mx-auto max-w-(--breakpoint-sm) rounded-lg border py-4 px-6 bg-slate-50 my-8">
           <EmailForm />
         </div>
       </main>
