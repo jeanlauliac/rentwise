@@ -12,7 +12,7 @@ export default function EmailForm() {
 
   return (
     <form
-      className="flex items-center gap-x-4 w-full h-10"
+      className="flex flex-col sm:flex-row items-stretch gap-4 w-full"
       action={(formData) => {
         startTransition(async () => {
           const resp = await addContact(formData);
@@ -31,7 +31,7 @@ export default function EmailForm() {
             placeholder="Enter your email"
             required
           />
-          <Button type="submit" className="w-48" disabled={isPending}>
+          <Button type="submit" className="w-full sm:w-48" disabled={isPending}>
             {isPending ? (
               <>
                 <LoaderCircle className="size-4 animate-spin" />

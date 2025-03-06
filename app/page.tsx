@@ -23,26 +23,27 @@ export default async function Home() {
         <div />
       </header>
       <main className="p-8 mt-8">
-        <div className="flex mx-auto max-w-(--breakpoint-lg) pt-16 justify-center items-center">
-          <div className="w-1/2 flex flex-col gap-8">
-            <p className="text-4xl font-bold">
+        <div className="flex flex-col md:flex-row mx-auto max-w-(--breakpoint-lg) pt-16 justify-center items-center">
+          <div className="w-full md:w-1/2 flex flex-col gap-8 mb-8 md:mb-0">
+            <p className="text-3xl md:text-4xl font-bold">
               Boost your{" "}
               <span className="text-blue-600 bg-slate-100 px-1">
                 rental income
               </span>{" "}
               with trusted reviews
             </p>
-            <p className="text-xl">
+            <p className="text-lg md:text-xl">
               Great tenants leave great reviews. Use{" "}
               <span className="font-bold">RentWise</span> to build trust and
               command higher rents.
             </p>
           </div>
-          <div className="w-1/2">
+          <div className="w-full md:w-1/2 px-4 md:px-8 flex items-center justify-center">
             <Image
               priority
               src={Hero}
-              alt="illustration of a tenant leaving a review"
+              alt="illustration of a house with a dialogue bubble showing a review"
+              className="max-w-full h-auto max-h-[300px] w-auto"
             />
           </div>
         </div>
