@@ -2,26 +2,24 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState, useTransition } from "react";
+import { useActionState } from "react";
 import { LoaderCircle } from "lucide-react";
 import { addContact } from "./actions";
 
 export default function EmailForm() {
-  const [isPending, startTransition] = useTransition();
-  const [message, setMessage] = useState("");
+  const [state, submitAction, isPending] = useActionState(addContact, {
+    success: false,
+  });
 
   return (
     <form
       className="flex flex-col sm:flex-row items-stretch gap-4 w-full"
-      action={(formData) => {
-        startTransition(async () => {
-          const resp = await addContact(formData);
-          if (resp.success) setMessage("Thank you, you're registered!");
-        });
-      }}
+      action={submitAction}
     >
-      {message ? (
-        <p className="text-sm text-slate-700 text-center w-full">{message}</p>
+      {state.success ? (
+        <p className="text-sm text-slate-700 text-center w-full">
+          Thank you, you&apos;re registered!
+        </p>
       ) : (
         <>
           <Input

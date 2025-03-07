@@ -1,6 +1,6 @@
 "use server";
 
-export async function addContact(formData: FormData) {
+export async function addContact(state: unknown, formData: FormData) {
   const email = formData.get("email");
 
   const response = await fetch("https://api.brevo.com/v3/contacts", {
