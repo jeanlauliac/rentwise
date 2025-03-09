@@ -1,8 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import Hero from "./hero.png";
 import EmailForm from "./email-form";
-import Logo from "./favicon.png";
 import {
   Home as HomeIcon,
   Clipboard,
@@ -11,15 +9,12 @@ import {
   Users,
   TrendingUp,
 } from "lucide-react";
+import Header from "./header";
 
 export default async function Home() {
   return (
     <div className="font-[family-name:var(--font-geist-sans)]">
-      <header className="fixed top-0 left-0 right-0 w-full h-12 bg-slate-50 border-b border-b-slate-100 px-4 py-2 z-10 shadow-xs flex items-center">
-        <Link href="/" className="font-bold text-lg flex items-center gap-2">
-          <Image src={Logo} alt="RentWise logo" className="w-5 h-5" />
-          rentwise.
-        </Link>
+      <Header>
         <ul className="flex flex-row gap-x-4 absolute left-1/2 transform -translate-x-1/2">
           <li>
             <a href="#">How it works</a>
@@ -29,7 +24,7 @@ export default async function Home() {
           </li>
         </ul>
         <div />
-      </header>
+      </Header>
       <main className="p-8 mt-8">
         <div className="flex flex-col md:flex-row mx-auto max-w-(--breakpoint-lg) pt-16 justify-center items-center">
           <div className="w-full md:w-1/2 flex flex-col gap-8 mb-8 md:mb-0">

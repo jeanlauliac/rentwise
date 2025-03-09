@@ -1,8 +1,6 @@
 import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import Logo from "../favicon.png";
 import FullRegistrationForm from "./full-registration-form";
+import Header from "../header";
 
 export const metadata: Metadata = {
   title: "Complete Your Registration | RentWise",
@@ -13,12 +11,7 @@ export const metadata: Metadata = {
 export default function FullRegistrationPage() {
   return (
     <div className="font-[family-name:var(--font-geist-sans)]">
-      <header className="fixed top-0 left-0 right-0 w-full h-12 bg-slate-50 border-b border-b-slate-100 px-4 py-2 z-10 shadow-xs flex items-center">
-        <Link href="/" className="font-bold text-lg flex items-center gap-2">
-          <Image src={Logo} alt="RentWise logo" className="w-5 h-5" />
-          rentwise.
-        </Link>
-      </header>
+      <Header />
       <main className="p-8 mt-16 max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold mb-6 text-center">
           Complete Your Registration
