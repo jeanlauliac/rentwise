@@ -3,6 +3,14 @@ import Link from "next/link";
 import Hero from "./hero.png";
 import EmailForm from "./email-form";
 import Logo from "./favicon.png";
+import {
+  Home as HomeIcon,
+  Clipboard,
+  BarChart3,
+  Star,
+  Users,
+  TrendingUp,
+} from "lucide-react";
 
 export default async function Home() {
   return (
@@ -63,26 +71,7 @@ export default async function Home() {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="bg-slate-200 p-3 rounded-full">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-slate-500"
-                    >
-                      <path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3" />
-                      <path d="M3 16V9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7" />
-                      <path d="M12 12h.01" />
-                      <path d="M3 16h18" />
-                      <path d="M12 20v-4" />
-                      <path d="M12 20h4" />
-                      <path d="M8 20h.01" />
-                    </svg>
+                    <HomeIcon className="text-slate-500" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg">
@@ -95,23 +84,7 @@ export default async function Home() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="bg-slate-200 p-3 rounded-full">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-slate-500"
-                    >
-                      <path d="M17 18a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v9Z" />
-                      <path d="m12 12 4-4" />
-                      <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
-                      <path d="M12 12v4" />
-                    </svg>
+                    <Clipboard className="text-slate-500" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg">Hesitant Tenants</h4>
@@ -122,24 +95,7 @@ export default async function Home() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="bg-slate-200 p-3 rounded-full">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-slate-500"
-                    >
-                      <path d="M2 20h.01" />
-                      <path d="M7 20v-4" />
-                      <path d="M12 20v-8" />
-                      <path d="M17 20V8" />
-                      <path d="M22 4v16" />
-                    </svg>
+                    <BarChart3 className="text-slate-500" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg">Lower Rent</h4>
@@ -159,20 +115,7 @@ export default async function Home() {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-100 p-3 rounded-full">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-blue-600"
-                    >
-                      <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 16.8 5.7 21l2.3-7-6-4.6h7.6L12 2z" />
-                    </svg>
+                    <Star className="text-blue-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg">
@@ -185,23 +128,7 @@ export default async function Home() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-100 p-3 rounded-full">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-blue-600"
-                    >
-                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                      <circle cx="9" cy="7" r="4" />
-                      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg>
+                    <Users className="text-blue-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg">More Inquiries</h4>
@@ -212,24 +139,7 @@ export default async function Home() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-100 p-3 rounded-full">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-blue-600"
-                    >
-                      <path d="M2 20h.01" />
-                      <path d="M7 20v-4" />
-                      <path d="M12 20v-8" />
-                      <path d="M17 20V8" />
-                      <path d="M22 4v16" />
-                    </svg>
+                    <TrendingUp className="text-blue-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg">
@@ -240,6 +150,73 @@ export default async function Home() {
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 px-4 md:px-6 lg:px-8 bg-slate-50">
+          <div className="container mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                How it works
+              </h2>
+              <p className="text-slate-600 max-w-2xl mx-auto">
+                Our simple three-step process helps landlords build trust and
+                attract better tenants
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {/* Step 1 */}
+              <div className="bg-white p-6 rounded-xl shadow-sm">
+                <div className="mb-4 flex justify-center">
+                  <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                    {/* Placeholder for doodle */}
+                    <span className="text-2xl font-bold text-blue-600">1</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold text-center mb-2">
+                  Invite tenants to leave a review
+                </h3>
+                <p className="text-slate-600 text-center">
+                  Ask your current and past tenants to share their honest rental
+                  experience
+                </p>
+              </div>
+
+              {/* Step 2 */}
+              <div className="bg-white p-6 rounded-xl shadow-sm">
+                <div className="mb-4 flex justify-center">
+                  <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                    {/* Placeholder for doodle */}
+                    <span className="text-2xl font-bold text-blue-600">2</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold text-center mb-2">
+                  Reviews build trust for future renters
+                </h3>
+                <p className="text-slate-600 text-center">
+                  Positive reviews create confidence and transparency for
+                  potential new tenants
+                </p>
+              </div>
+
+              {/* Step 3 */}
+              <div className="bg-white p-6 rounded-xl shadow-sm">
+                <div className="mb-4 flex justify-center">
+                  <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                    {/* Placeholder for doodle */}
+                    <span className="text-2xl font-bold text-blue-600">3</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold text-center mb-2">
+                  Attract better tenants & justify higher rent
+                </h3>
+                <p className="text-slate-600 text-center">
+                  Quality reviews help you stand out, attracting reliable
+                  tenants willing to pay premium rates
+                </p>
               </div>
             </div>
           </div>
