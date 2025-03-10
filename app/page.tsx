@@ -50,9 +50,11 @@ export default async function Home() {
             />
           </div>
         </div>
+
         <div className="flex mx-auto max-w-(--breakpoint-sm) rounded-lg border py-4 px-6 bg-slate-50 my-8">
           <EmailForm />
         </div>
+
         <section className="py-16 px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
             The RentWise Difference

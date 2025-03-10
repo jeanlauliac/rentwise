@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useActionState } from "react";
-import { LoaderCircle } from "lucide-react";
+import { SubmitButton } from "@/components/ui/submit-button";
 import { addContact } from "./actions";
 
 export default function EmailForm() {
@@ -22,14 +22,7 @@ export default function EmailForm() {
         required
       />
       <Button type="submit" className="w-full sm:w-48" disabled={isPending}>
-        {isPending ? (
-          <>
-            <LoaderCircle className="size-4 animate-spin" />
-            Sending...
-          </>
-        ) : (
-          "Get started now"
-        )}
+        <SubmitButton label="Get tenant reviews" isPending={isPending} />
       </Button>
     </form>
   );
