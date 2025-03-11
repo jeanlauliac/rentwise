@@ -52,7 +52,7 @@ export default function RegistrationForm(props: { email?: string }) {
               </FormControl>
               <FormMessage />
               <FormDescription>
-                Your full name as it appears on the tenancy agreement
+                Your full name as it appears on the tenancy agreement.
               </FormDescription>
             </FormItem>
           )}
@@ -92,8 +92,8 @@ export default function RegistrationForm(props: { email?: string }) {
               </FormControl>
               <FormMessage />
               <FormDescription>
-                The full address of the first property you are registering for
-                reviews. You can add more properties later.
+                The full address of the first property you are getting reviews
+                for. You can add more properties later.
               </FormDescription>
             </FormItem>
           )}
