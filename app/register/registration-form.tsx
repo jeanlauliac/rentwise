@@ -18,6 +18,7 @@ import {
 import { RegistrationSchema } from "./common";
 import { useTransition } from "react";
 import { Textarea } from "@/components/ui/textarea";
+import { useScrollToTop } from "@/lib/utils";
 
 export default function RegistrationForm(props: { email?: string }) {
   const form = useForm<z.infer<typeof RegistrationSchema>>({
@@ -33,6 +34,10 @@ export default function RegistrationForm(props: { email?: string }) {
   function onSubmit(values: z.infer<typeof RegistrationSchema>) {
     startTransition(() => registerLandlord(values));
   }
+
+  // Scroll to top when we navigate to the page from the homepage. I'm not sure
+  // why this is needed, need to open a ticket on Next.js repo later.
+  useScrollToTop();
 
   return (
     <Form {...form}>
@@ -73,6 +78,9 @@ export default function RegistrationForm(props: { email?: string }) {
                 />
               </FormControl>
               <FormMessage />
+              <FormDescription>
+                You&apos;ll need access to this email to log into your account.
+              </FormDescription>
             </FormItem>
           )}
         />
@@ -92,8 +100,8 @@ export default function RegistrationForm(props: { email?: string }) {
               </FormControl>
               <FormMessage />
               <FormDescription>
-                The full address of the first property you are getting reviews
-                for. You can add more properties later.
+                The full address of the property you are getting reviews for.
+                You can add more properties later.
               </FormDescription>
             </FormItem>
           )}

@@ -1,7 +1,6 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { nanoid } from "nanoid";
 import { z } from "zod";
 
 const StartRegistrationSchema = z.object({

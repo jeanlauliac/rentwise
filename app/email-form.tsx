@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useActionState } from "react";
 import { SubmitButton } from "@/components/ui/submit-button";
@@ -21,9 +20,11 @@ export default function EmailForm() {
         placeholder="Enter your email"
         required
       />
-      <Button type="submit" className="w-full sm:w-48" disabled={isPending}>
-        <SubmitButton label="Get tenant reviews" isPending={isPending} />
-      </Button>
+      <SubmitButton
+        className="w-full sm:w-48"
+        label="Get tenant reviews"
+        isPending={isPending}
+      />
     </form>
   );
 }
