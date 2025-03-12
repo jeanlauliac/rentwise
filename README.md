@@ -14,9 +14,6 @@ cp env.example .env
 # Create the DB tables
 npx drizzle-kit push
 
-# Seed the DB with the ZINC library
-npm run db:seed
-
 # Start the Next.js development server
 npm run dev
 ```
