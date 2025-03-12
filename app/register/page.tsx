@@ -26,7 +26,7 @@ export default async function FullRegistrationPage(props: {
           with tenants.
         </p>
 
-        <div className="bg-white p-8 rounded-lg shadow-sm border border-slate-200">
+        <div className="bg-white py-8 md:p-8 rounded-lg md:shadow-sm md:border border-slate-200">
           <p className="text-slate-800 text-lg mb-2">
             One-time registration fee &mdash; just{" "}
             <span className="font-bold">£20</span>

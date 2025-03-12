@@ -47,13 +47,9 @@ export default function RegistrationForm(props: { email?: string }) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Your Name</FormLabel>
+              <FormLabel>Your name</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  className="max-w-xs"
-                  placeholder="John Smith"
-                />
+                <Input {...field} className="max-w-xs" />
               </FormControl>
               <FormMessage />
               <FormDescription>
@@ -68,14 +64,9 @@ export default function RegistrationForm(props: { email?: string }) {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email Address</FormLabel>
+              <FormLabel>Email address</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  className="max-w-xs"
-                  type="email"
-                  placeholder="you@example.com"
-                />
+                <Input {...field} className="max-w-xs" type="email" />
               </FormControl>
               <FormMessage />
               <FormDescription>
@@ -90,13 +81,9 @@ export default function RegistrationForm(props: { email?: string }) {
           name="propertyAddress"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Property Address</FormLabel>
+              <FormLabel>Property address</FormLabel>
               <FormControl>
-                <Textarea
-                  {...field}
-                  className="max-w-lg"
-                  placeholder="123 Oak Street, Flat 3A, London, E1 1AA"
-                />
+                <Textarea {...field} className="max-w-lg" />
               </FormControl>
               <FormMessage />
               <FormDescription>
