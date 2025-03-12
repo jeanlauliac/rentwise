@@ -1,33 +1,16 @@
-// import {
-//   integer,
-//   pgTable,
-//   varchar,
-//   text,
-//   real,
-//   jsonb,
-//   timestamp,
-//   serial,
-// } from "drizzle-orm/pg-core";
+import { pgTable, varchar, timestamp, serial } from "drizzle-orm/pg-core";
 
-// export const customColumnsTable = pgTable("custom_columns", {
-//   id: serial("id").primaryKey(),
-//   title: varchar({ length: 100 }).notNull(),
-//   dataType: varchar({ length: 20 }).notNull(),
-//   createdAt: timestamp().defaultNow().notNull(),
-// });
+export const landlordsTable = pgTable("landlords", {
+  id: serial("id").primaryKey(),
+  name: varchar({ length: 100 }).notNull(),
+  email: varchar({ length: 255 }).notNull().unique(),
+  addressLine1: varchar({ length: 200 }).notNull(),
+  addressLine2: varchar({ length: 200 }),
+  city: varchar({ length: 100 }).notNull(),
+  postcode: varchar({ length: 10 }).notNull(),
+  createdAt: timestamp().defaultNow().notNull(),
+  updatedAt: timestamp().defaultNow().notNull(),
+});
 
-// export const moleculesTable = pgTable("molecules", {
-//   zincId: varchar({ length: 16 }).primaryKey(),
-//   smiles: text().notNull(),
-//   molecularWeight: real().notNull(),
-//   logP: real().notNull(),
-//   numHeavyAtoms: integer().notNull(),
-//   numHBondAcceptors: integer().notNull(),
-//   numHBondDonors: integer().notNull(),
-//   x: real().notNull(),
-//   y: real().notNull(),
-//   customData: jsonb().default({}).$type<Record<string, string | number>>(),
-// });
-
-// export type Molecule = typeof moleculesTable.$inferSelect;
-// export type CustomColumn = typeof customColumnsTable.$inferSelect;
+export type Landlord = typeof landlordsTable.$inferSelect;
+export type NewLandlord = typeof landlordsTable.$inferInsert;

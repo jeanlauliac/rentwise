@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/form";
 import { RegistrationSchema } from "./common";
 import { useTransition } from "react";
-import { Textarea } from "@/components/ui/textarea";
 import { useScrollToTop } from "@/lib/utils";
 
 export default function RegistrationForm(props: { email?: string }) {
@@ -26,13 +25,19 @@ export default function RegistrationForm(props: { email?: string }) {
     defaultValues: {
       name: "",
       email: props.email,
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      postcode: "",
     },
   });
 
   const [isPending, startTransition] = useTransition();
 
   function onSubmit(values: z.infer<typeof RegistrationSchema>) {
-    startTransition(() => registerLandlord(values));
+    startTransition(async () => {
+      await registerLandlord(values);
+    });
   }
 
   // Scroll to top when we navigate to the page from the homepage. I'm not sure
@@ -76,23 +81,72 @@ export default function RegistrationForm(props: { email?: string }) {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="propertyAddress"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Property address</FormLabel>
-              <FormControl>
-                <Textarea {...field} className="max-w-lg" />
-              </FormControl>
-              <FormMessage />
-              <FormDescription>
-                The full address of the property you are getting reviews for.
-                You can add more properties later.
-              </FormDescription>
-            </FormItem>
-          )}
-        />
+        <div className="space-y-6 mt-12">
+          <h3 className="text-lg font-medium">Property address</h3>
+
+          <FormField
+            control={form.control}
+            name="addressLine1"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Address line 1</FormLabel>
+                <FormControl>
+                  <Input {...field} className="max-w-lg" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="addressLine2"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Address line 2 (optional)</FormLabel>
+                <FormControl>
+                  <Input {...field} className="max-w-lg" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 max-w-lg">
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>City</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="postcode"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Postcode</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <FormDescription>
+            The address of the property you are getting reviews for. You can add
+            more properties later.
+          </FormDescription>
+        </div>
 
         <SubmitButton label="Register" isPending={isPending} />
       </form>
