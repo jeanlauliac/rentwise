@@ -4,6 +4,7 @@ import { RegistrationSchema } from "./common";
 import { z } from "zod";
 import db from "@/db";
 import { landlordsTable } from "@/db/schema";
+import { redirect } from "next/navigation";
 
 export async function registerLandlord(
   values: z.infer<typeof RegistrationSchema>
@@ -26,7 +27,9 @@ export async function registerLandlord(
     })
     .returning({ id: landlordsTable.id });
 
-  return { success: true, landlordId: result[0]?.id };
+  // TODO: need to authenticate the user after they register
+  // return { success: true, landlordId: result[0]?.id };
+  redirect(`/landlord/dashboard`);
 }
 
 async function updateContactInBrevo(email: string, name: string) {
