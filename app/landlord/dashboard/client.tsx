@@ -2,33 +2,39 @@
 
 import { Button } from "@/components/ui/button";
 import { initializePaddle } from "@paddle/paddle-js";
-import { useState } from "react";
+import { useEffect, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function DashboardClient() {
-  const paddle = usePaddle();
+  const searchParams = useSearchParams();
+
+  const handlePay = useCallback(async () => {
+    const paddle = initializePaddle({
+      environment: "sandbox",
+      token: process.env.NEXT_PUBLIC_PADDLE_TOKEN!,
+    });
+    (await paddle)?.Checkout.open({
+      items: [{ priceId: "pri_01jp8fj7bnw1fgt5xsfd9j9f8b", quantity: 1 }],
+      customer: {
+        email: "test@test.com",
+        address: {
+          postalCode: "SE1 1AA",
+          countryCode: "GB",
+        },
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    if (searchParams.has("payment")) {
+      handlePay();
+    }
+  }, [searchParams, handlePay]);
 
   return (
     <main className="p-8 mt-16 max-w-3xl mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-center">Dashboard</h1>
-      <Button
-        onClick={async () => {
-          (await paddle)?.Checkout.open({
-            items: [{ priceId: "pri_01jp8fj7bnw1fgt5xsfd9j9f8b", quantity: 1 }],
-          });
-        }}
-      >
-        Pay
-      </Button>
+      <Button onClick={handlePay}>Pay</Button>
     </main>
   );
-}
-
-function usePaddle() {
-  const [paddle] = useState(() =>
-    initializePaddle({
-      environment: "sandbox",
-      token: process.env.NEXT_PUBLIC_PADDLE_TOKEN!,
-    })
-  );
-  return paddle;
 }
