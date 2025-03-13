@@ -5,6 +5,30 @@ import { z } from "zod";
 import db from "@/db";
 import { landlordsTable } from "@/db/schema";
 
+export async function registerLandlord(
+  values: z.infer<typeof RegistrationSchema>
+) {
+  const validatedData = RegistrationSchema.parse(values);
+
+  // Update contact in Brevo with the full name
+  await updateContactInBrevo(validatedData.email, validatedData.name);
+
+  // Create the landlord in the database
+  const result = await db
+    .insert(landlordsTable)
+    .values({
+      name: validatedData.name,
+      email: validatedData.email,
+      addressLine1: validatedData.addressLine1,
+      addressLine2: validatedData.addressLine2 || null,
+      city: validatedData.city,
+      postcode: validatedData.postcode,
+    })
+    .returning({ id: landlordsTable.id });
+
+  return { success: true, landlordId: result[0]?.id };
+}
+
 async function updateContactInBrevo(email: string, name: string) {
   const response = await fetch("https://api.brevo.com/v3/contacts", {
     method: "PUT",
@@ -27,27 +51,4 @@ async function updateContactInBrevo(email: string, name: string) {
     // We don't throw here since this is a secondary operation
     // The main registration should succeed even if Brevo update fails
   }
-}
-
-export async function registerLandlord(
-  values: z.infer<typeof RegistrationSchema>
-) {
-  const validatedData = RegistrationSchema.parse(values);
-
-  const result = await db
-    .insert(landlordsTable)
-    .values({
-      name: validatedData.name,
-      email: validatedData.email,
-      addressLine1: validatedData.addressLine1,
-      addressLine2: validatedData.addressLine2 || null,
-      city: validatedData.city,
-      postcode: validatedData.postcode,
-    })
-    .returning({ id: landlordsTable.id });
-
-  // Update contact in Brevo with the full name
-  await updateContactInBrevo(validatedData.email, validatedData.name);
-
-  return { success: true, landlordId: result[0]?.id };
 }

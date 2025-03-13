@@ -91,7 +91,7 @@ export default function RegistrationForm(props: { email?: string }) {
               <FormItem>
                 <FormLabel>Address line 1</FormLabel>
                 <FormControl>
-                  <Input {...field} className="max-w-lg" />
+                  <Input {...field} className="max-w-md" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -105,14 +105,14 @@ export default function RegistrationForm(props: { email?: string }) {
               <FormItem>
                 <FormLabel>Address line 2 (optional)</FormLabel>
                 <FormControl>
-                  <Input {...field} className="max-w-lg" />
+                  <Input {...field} className="max-w-md" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 max-w-lg">
+          <div className="flex flex-row gap-6 flex-wrap">
             <FormField
               control={form.control}
               name="city"
@@ -120,7 +120,7 @@ export default function RegistrationForm(props: { email?: string }) {
                 <FormItem>
                   <FormLabel>City</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} className="max-w-xs" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -134,7 +134,7 @@ export default function RegistrationForm(props: { email?: string }) {
                 <FormItem>
                   <FormLabel>Postcode</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} className="max-w-xs" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
