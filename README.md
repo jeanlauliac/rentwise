@@ -5,6 +5,9 @@
 ```
 npm install
 
+# Run a local SMTP service
+npx maildev
+
 # Start a local supabase Postgres DB
 npx supabase start
 
