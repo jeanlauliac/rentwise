@@ -34,6 +34,7 @@ export default function DashboardClient(props: { email: string }) {
   return (
     <main className="p-8 mt-16 max-w-3xl mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-center">Dashboard</h1>
+      <p className="mb-6">Email: {props.email}</p>
       <Button onClick={handlePay}>Pay</Button>
     </main>
   );
