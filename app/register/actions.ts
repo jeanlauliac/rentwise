@@ -16,13 +16,13 @@ export async function registerLandlord(
   await updateContactInBrevo(validatedData.email, validatedData.name);
 
   const supabase = await createClient();
-  const { data, error } = await supabase.auth.signInWithOtp({
+  const { error } = await supabase.auth.signInWithOtp({
     email: validatedData.email,
     options: {
       emailRedirectTo:
         process.env.NODE_ENV === "production"
-          ? "https://www.rentwise.com/dashboard"
-          : "http://localhost:3000/dashboard",
+          ? "https://www.rentwise.com/landlord/dashboard"
+          : "http://localhost:3000/landlord/dashboard",
     },
   });
 

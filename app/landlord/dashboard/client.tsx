@@ -5,7 +5,7 @@ import { initializePaddle } from "@paddle/paddle-js";
 import { useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function DashboardClient() {
+export default function DashboardClient(props: { email: string }) {
   const searchParams = useSearchParams();
 
   const handlePay = useCallback(async () => {
@@ -16,14 +16,14 @@ export default function DashboardClient() {
     (await paddle)?.Checkout.open({
       items: [{ priceId: "pri_01jp8fj7bnw1fgt5xsfd9j9f8b", quantity: 1 }],
       customer: {
-        email: "test@test.com",
+        email: props.email,
         address: {
           postalCode: "SE1 1AA",
           countryCode: "GB",
         },
       },
     });
-  }, []);
+  }, [props.email]);
 
   useEffect(() => {
     if (searchParams.has("payment")) {
