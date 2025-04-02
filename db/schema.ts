@@ -4,7 +4,11 @@ import { authUsers } from "drizzle-orm/supabase";
 // FIXME: enable RLS for this table, see https://orm.drizzle.team/docs/rls
 // and https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/supabase/rls.ts
 export const landlords = pgTable("landlords", {
-  id: uuid("id").references(() => authUsers.id, { onDelete: "cascade" }),
+  id: uuid("id")
+    .primaryKey()
+    .references(() => authUsers.id, {
+      onDelete: "cascade",
+    }),
   name: varchar({ length: 100 }).notNull(),
   addressLine1: varchar({ length: 200 }).notNull(),
   addressLine2: varchar({ length: 200 }),
