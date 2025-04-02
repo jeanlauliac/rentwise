@@ -1,9 +1,11 @@
-import { pgTable, varchar, timestamp, serial } from "drizzle-orm/pg-core";
+import { pgTable, varchar, timestamp, uuid } from "drizzle-orm/pg-core";
+import { authUsers } from "drizzle-orm/supabase";
 
-export const landlordsTable = pgTable("landlords", {
-  id: serial("id").primaryKey(),
+// FIXME: enable RLS for this table, see https://orm.drizzle.team/docs/rls
+// and https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/supabase/rls.ts
+export const landlords = pgTable("landlords", {
+  id: uuid("id").references(() => authUsers.id, { onDelete: "cascade" }),
   name: varchar({ length: 100 }).notNull(),
-  email: varchar({ length: 255 }).notNull().unique(),
   addressLine1: varchar({ length: 200 }).notNull(),
   addressLine2: varchar({ length: 200 }),
   city: varchar({ length: 100 }).notNull(),
@@ -12,5 +14,5 @@ export const landlordsTable = pgTable("landlords", {
   updatedAt: timestamp().defaultNow().notNull(),
 });
 
-export type Landlord = typeof landlordsTable.$inferSelect;
-export type NewLandlord = typeof landlordsTable.$inferInsert;
+export type Landlord = typeof landlords.$inferSelect;
+export type NewLandlord = typeof landlords.$inferInsert;

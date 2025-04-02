@@ -3,6 +3,10 @@ import { type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
+/**
+ * Confirm the email address of a user when signing up or logging in. It is
+ * called when a user clicks on the link in the email.
+ */
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 

@@ -16,9 +16,9 @@ import {
   FormDescription,
 } from "@/components/ui/form";
 import { RegistrationSchema } from "./common";
-import { useTransition } from "react";
+import { useTransition, useState } from "react";
 import { useScrollToTop } from "@/lib/utils";
-
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 export default function RegistrationForm(props: { email?: string }) {
   const form = useForm<z.infer<typeof RegistrationSchema>>({
     resolver: zodResolver(RegistrationSchema),
@@ -33,10 +33,14 @@ export default function RegistrationForm(props: { email?: string }) {
   });
 
   const [isPending, startTransition] = useTransition();
+  const [isSuccess, setIsSuccess] = useState(false);
 
   function onSubmit(values: z.infer<typeof RegistrationSchema>) {
     startTransition(async () => {
-      await registerLandlord(values);
+      const result = await registerLandlord(values);
+      if (result.success) {
+        setIsSuccess(true);
+      }
     });
   }
 
@@ -148,8 +152,24 @@ export default function RegistrationForm(props: { email?: string }) {
           </FormDescription>
         </div>
 
-        <SubmitButton label="Register" isPending={isPending} />
+        {isSuccess ? (
+          <SuccessMessage />
+        ) : (
+          <SubmitButton label="Register" isPending={isPending} />
+        )}
       </form>
     </Form>
+  );
+}
+
+function SuccessMessage() {
+  return (
+    <Alert>
+      <AlertTitle>Please check your emails</AlertTitle>
+      <AlertDescription>
+        We&apos;ve sent a verification link to your email address. Please check
+        your email and click the link to complete your registration.
+      </AlertDescription>
+    </Alert>
   );
 }

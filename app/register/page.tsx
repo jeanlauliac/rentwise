@@ -27,7 +27,7 @@ export default async function FullRegistrationPage(props: {
         </p>
 
         <div className="bg-white py-8 md:p-8 rounded-lg md:shadow-sm md:border border-slate-200">
-          <p className="text-slate-800 text-lg mb-2">
+          {/* <p className="text-slate-800 text-lg mb-2">
             One-time registration fee &mdash; just{" "}
             <span className="font-bold">£20</span>
           </p>
@@ -38,7 +38,7 @@ export default async function FullRegistrationPage(props: {
           <p className="text-slate-600 mb-6 text-sm">
             This one-time fee gives you full access to RentWise, helping you
             attract better tenants and maximize your rental income.
-          </p>
+          </p> */}
           <RegistrationForm email={email} />
         </div>
       </main>

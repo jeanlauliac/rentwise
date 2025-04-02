@@ -2,8 +2,6 @@
 
 import { RegistrationSchema } from "./common";
 import { z } from "zod";
-import db from "@/db";
-import { landlordsTable } from "@/db/schema";
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 
@@ -21,8 +19,8 @@ export async function registerLandlord(
     options: {
       emailRedirectTo:
         process.env.NODE_ENV === "production"
-          ? "https://www.rentwise.com/landlord/dashboard"
-          : "http://localhost:3000/landlord/dashboard",
+          ? "https://www.rentwise.com/landlord/complete-registration"
+          : "http://localhost:3000/landlord/complete-registration",
     },
   });
 
@@ -30,70 +28,43 @@ export async function registerLandlord(
     throw error;
   }
 
-  // Store registration data in an encrypted cookie
+  // Store registration data locally. Once the user confirms the email address,
+  // we will use this data to create the landlord record. We don't create the
+  // record right away to avoid spamming the database with unconfirmed emails.
   const cookieStore = await cookies();
   cookieStore.set("registrationData", JSON.stringify(validatedData), {
-    // Cookie options
     httpOnly: true, // Makes it inaccessible to client-side JS
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 60 * 30, // 30 minutes
+    maxAge: 60 * 60, // 1 hour (same as the email magic link timeout)
   });
 
   return { success: true };
 }
 
 async function updateContactInBrevo(email: string, name: string) {
-  const response = await fetch("https://api.brevo.com/v3/contacts", {
-    method: "PUT",
-    headers: {
-      Accept: "application/json",
-      "Api-Key": process.env.BREVO_API_KEY ?? "",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-      attributes: {
-        FIRSTNAME: name.split(" ")[0] || "",
-        LASTNAME: name.split(" ").slice(1).join(" ") || "",
+  const response = await fetch(
+    `https://api.brevo.com/v3/contacts/${email}?identifierType=email_id`,
+    {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Api-Key": process.env.BREVO_API_KEY ?? "",
+        "Content-Type": "application/json",
       },
-    }),
-  });
+      body: JSON.stringify({
+        attributes: {
+          FULLNAME: name,
+          FIRSTNAME: name.split(" ")[0] || "",
+          LASTNAME: name.split(" ").slice(1).join(" ") || "",
+        },
+      }),
+    }
+  );
 
   if (!response.ok) {
     console.error("Failed to update contact in Brevo:", await response.text());
     // We don't throw here since this is a secondary operation
     // The main registration should succeed even if Brevo update fails
   }
-}
-
-// TODO: need to call this from client after they sign in
-export async function completeLandlordRegistration() {
-  // Get the stored registration data
-  const cookieStore = await cookies();
-  const storedData = cookieStore.get("registrationData");
-
-  if (!storedData) {
-    throw new Error("Registration data not found");
-  }
-
-  const registrationData = JSON.parse(storedData.value);
-
-  // Clear the cookie after retrieving the data
-  cookieStore.delete("registrationData");
-
-  // Create the landlord record
-  const result = await db
-    .insert(landlordsTable)
-    .values({
-      name: registrationData.name,
-      email: registrationData.email,
-      addressLine1: registrationData.addressLine1,
-      addressLine2: registrationData.addressLine2 || null,
-      city: registrationData.city,
-      postcode: registrationData.postcode,
-    })
-    .returning({ id: landlordsTable.id });
-
-  return { success: true, landlordId: result[0]?.id };
 }
