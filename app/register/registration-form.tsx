@@ -19,6 +19,7 @@ import { RegistrationSchema } from "./common";
 import { useTransition, useState } from "react";
 import { useScrollToTop } from "@/lib/utils";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+
 export default function RegistrationForm(props: { email?: string }) {
   const form = useForm<z.infer<typeof RegistrationSchema>>({
     resolver: zodResolver(RegistrationSchema),

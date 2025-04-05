@@ -18,7 +18,7 @@ export async function registerLandlord(
     email: validatedData.email,
     options: {
       emailRedirectTo:
-        process.env.NODE_ENV === "production"
+        process.env.VERCEL_ENV === "production"
           ? "https://www.rentwise.com/landlord/complete-registration"
           : "http://localhost:3000/landlord/complete-registration",
     },
@@ -34,7 +34,7 @@ export async function registerLandlord(
   const cookieStore = await cookies();
   cookieStore.set("registrationData", JSON.stringify(validatedData), {
     httpOnly: true, // Makes it inaccessible to client-side JS
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.VERCEL_ENV === "production",
     sameSite: "lax",
     maxAge: 60 * 60, // 1 hour (same as the email magic link timeout)
   });
